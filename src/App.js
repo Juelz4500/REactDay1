@@ -1,25 +1,37 @@
-import logo from './logo.svg';
+import React, { Component } from 'react';
 import './App.css';
+import Greet from './components/Greet';
+import Navbar1 from './components/Navbar1';
+import Features from './components/Features';
+import { Routes, Route, BrowserRouter } from 'react-router-dom';
 
-function App() {
+class App extends Component {
+  constructor() {
+    super();
+    this.state = {
+      post: [],
+      user: {},
+      number_of_apples: 20,
+      personname: 'Julian'
+    }
+  }
+
+  addToApples = () => {
+    this.setState({age: this.state.number_of_apples + 1})
+  }
+  render() {
   return (
+    <BrowserRouter>
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Navbar1/>
+      <Routes>
+        <Route path='/Greet' element={<Greet></Greet>}></Route>
+        <Route path='/Features' element={<Features mystate={this.state.number_of_apples} />}></Route>
+      </Routes>
     </div>
+    </BrowserRouter>
   );
+  }
 }
 
 export default App;
